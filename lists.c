@@ -14,15 +14,25 @@ int pop(list, char *out);
 void list_items(list);
 void reverse_list(list);
 void free_list(list);
+int is_empty(list);
 list allocate_item();
 
 list allocate_item() {
-    list item = malloc(sizeof(struct item));
+    list item = (list) malloc(sizeof(struct item));
     if (item == NULL) {
         fprintf(stderr,"Out of memory.\n");
         exit(1);
     }
     return item;
+}
+
+int is_empty(list items) {
+    list curr = items->next;
+    if (curr == curr->next) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 list create_list() {
@@ -42,7 +52,7 @@ void push(list items, const char *name) {
 
 int pop(list items, char *out) {
     list curr = items->next;
-    if (curr->next == curr) {
+    if (is_empty(items)) {
         *out = '\0';
         return 0;
     } else {
@@ -93,19 +103,22 @@ void free_list(list items) {
 int main(void) {
    list items = create_list();
    char name[NAME_LEN];
-    push(items,"3");
-    push(items,"2");
     push(items,"1");
+    push(items,"2");
+    push(items,"3");
    list_items(items);
    reverse_items(items);
    list_items(items);
-   pop(items,name);
-   printf("POP: %s\n",name);
+   while (!is_empty(items)) {
+       pop(items,name);
+       printf("POP: %s\n",name);
+   }
    printf("PUSH: Kirk\n");
    push(items,"Kirk");
    list_items(items);
-   while (pop(items,name)) {
+   if (pop(items,name))
        printf("POP: %s\n",name);
-   }
+   if (!pop(items,name))
+       printf("Empty List\n");
    free_list(items);
 }
