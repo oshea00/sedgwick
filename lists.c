@@ -4,7 +4,7 @@
 #define NAME_LEN 20
 
 typedef struct item {
-    char name[NAME_LEN+1];
+    char name[NAME_LEN];
     struct item *next;
 } *list;
 
@@ -35,7 +35,7 @@ list create_list() {
 
 void push(list items, const char *name) {
     list item = allocate_item();
-    snprintf(item->name,NAME_LEN+1, "%s", name);
+    snprintf(item->name,NAME_LEN, "%s", name);
     item->next = items->next;
     items->next = item;
 }
@@ -46,7 +46,7 @@ int pop(list items, char *out) {
         *out = '\0';
         return 0;
     } else {
-        snprintf(out,NAME_LEN+1, "%s", curr->name);
+        snprintf(out,NAME_LEN, "%s", curr->name);
         items->next = curr->next;
         free(curr);
         return 1;
@@ -92,7 +92,7 @@ void free_list(list items) {
 
 int main(void) {
    list items = create_list();
-   char name[NAME_LEN+1];
+   char name[NAME_LEN];
     push(items,"3");
     push(items,"2");
     push(items,"1");
