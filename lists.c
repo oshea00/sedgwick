@@ -12,6 +12,7 @@ list create_list();
 void push(list, const char *);
 int pop(list, char *out);
 void list_items(list);
+void reverse_list(list);
 void free_list(list);
 list allocate_item();
 
@@ -61,6 +62,20 @@ void list_items(list items) {
     }
 }
 
+void reverse_items(list items) {
+    list prev = items->next;
+    list curr = items->next->next;    
+    printf("Reversing.\n");
+    while (curr->next != curr) {
+        list tmp = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = tmp; 
+    }
+    items->next->next = curr;
+    items->next = prev;
+ }
+
 void free_list(list items) {
     list curr = items->next;
     while (curr->next != curr) {
@@ -78,10 +93,11 @@ void free_list(list items) {
 int main(void) {
    list items = create_list();
    char name[NAME_LEN+1];
-   push(items,"Mike");
-   push(items,"Steve");
-   push(items,"Alice");
-   push(items,"really_too_long_name123");
+    push(items,"3");
+    push(items,"2");
+    push(items,"1");
+   list_items(items);
+   reverse_items(items);
    list_items(items);
    pop(items,name);
    printf("POP: %s\n",name);

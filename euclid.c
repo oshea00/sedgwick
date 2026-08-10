@@ -16,7 +16,7 @@ int gcd(int u, int v) {
     return v;
 }
 
-void main() {
+int main(void) {
     int u,v;
     printf("max int = %d", __INT_MAX__);
     while (1) {
