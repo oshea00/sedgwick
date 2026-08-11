@@ -136,7 +136,7 @@ void free_queue(list items) {
   }
   printf("FREE: tail\n");
   free(curr);
-  printf("FREE: head\n");
+  printf("FREE: head.\n");
   free(items);
 }
 
@@ -158,6 +158,6 @@ int main(void) {
   if (dequeue(items, name))
     printf("DEQUEUE: %s\n", name);
   if (!dequeue(items, name))
-    printf("Queue is empty.\n");
+    printf("Queue is empty\n");
   free_queue(items);
 }
