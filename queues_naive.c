@@ -140,7 +140,7 @@ void free_queue(list items) {
   free(items);
 }
 
-// Demo: enqueue three items, reverse, drain the queue, then enqueue/dequeue one
+// Demo: enqueue three items, drain the queue, then enqueue/dequeue one
 // more item and confirm the empty case before freeing everything.
 int main(void) {
   list items = create_queue();
