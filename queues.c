@@ -107,7 +107,7 @@ void free_queue(queue *q) {
   free(q);
 }
 
-// Demo: enqueue three items, reverse, drain the queue, then enqueue/dequeue one
+// Demo: enqueue three items, drain the queue, then enqueue/dequeue one
 // more item and confirm the empty case before freeing everything.
 int main(void) {
   queue *q = create_queue();
