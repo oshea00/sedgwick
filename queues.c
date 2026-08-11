@@ -125,6 +125,6 @@ int main(void) {
   if (dequeue(q, name))
     printf("DEQUEUE: %s\n", name);
   if (!dequeue(q, name))
-    printf("Queue is empty.\n");
+    printf("Queue is empty\n");
   free_queue(q);
 }

@@ -88,7 +88,7 @@ void list_items(list items) {
 void reverse_items(list items) {
   list prev = items->next;
   list curr = items->next->next;
-  printf("Reversing.\n");
+  printf("Reversed\n");
   while (curr->next != curr) {
     list tmp = curr->next;
     curr->next = prev;
@@ -109,7 +109,7 @@ void free_list(list items) {
   }
   printf("FREE: tail\n");
   free(curr);
-  printf("FREE: head\n");
+  printf("FREE: head.\n");
   free(items);
 }
 
