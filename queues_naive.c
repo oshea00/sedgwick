@@ -21,10 +21,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NAME_LEN 20
+#define VALUE_LEN 20
 
 typedef struct item {
-  char name[NAME_LEN];
+  char name[VALUE_LEN];
   struct item *next;
 } *list;
 
@@ -69,7 +69,7 @@ list create_queue() {
 // Insert a new node right after the head (a stack-like LIFO push).
 void enqueue(const list items, const char *name) {
   list item = allocate_item();
-  snprintf(item->name, NAME_LEN, "%s", name);
+  snprintf(item->name, VALUE_LEN, "%s", name);
   item->next = items->next;
   items->next = item;
 }
@@ -91,7 +91,7 @@ int dequeue(const list items, char *out) {
     curr = curr->next;
   }
 
-  snprintf(out, NAME_LEN, "%s", curr->name);
+  snprintf(out, VALUE_LEN, "%s", curr->name);
   prev->next = curr->next;
   free(curr);
 
@@ -144,7 +144,7 @@ void free_queue(list items) {
 // more item and confirm the empty case before freeing everything.
 int main(void) {
   list items = create_queue();
-  char name[NAME_LEN];
+  char name[VALUE_LEN];
   enqueue(items, "1");
   enqueue(items, "2");
   enqueue(items, "3");

@@ -14,10 +14,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NAME_LEN 20
+#define VALUE_LEN 20
 
 typedef struct item {
-  char name[NAME_LEN];
+  char name[VALUE_LEN];
   struct item *next;
 } item;
 
@@ -68,7 +68,7 @@ void list_queue(const queue *q) {
 
 void enqueue(queue *q, const char *name) {
   item *newitem = allocate_item();
-  snprintf(newitem->name, NAME_LEN, "%s", name);
+  snprintf(newitem->name, VALUE_LEN, "%s", name);
   newitem->next = NULL;
 
   if (q->tail == NULL) {
@@ -86,7 +86,7 @@ int dequeue(queue *q, char *out) {
     return 0;
   }
   item *i = q->head;
-  snprintf(out, NAME_LEN, "%s", i->name);
+  snprintf(out, VALUE_LEN, "%s", i->name);
   q->head = i->next;
   if (q->head == NULL)
     q->tail = NULL;
@@ -98,7 +98,7 @@ int queue_empty(const queue *q) { return q->head == NULL; }
 
 // Free every item node, then the queue structure.
 void free_queue(queue *q) {
-  char name[NAME_LEN];
+  char name[VALUE_LEN];
   while (!queue_empty(q)) {
     dequeue(q, name);
     printf("FREE: %s\n", name);
@@ -111,7 +111,7 @@ void free_queue(queue *q) {
 // more item and confirm the empty case before freeing everything.
 int main(void) {
   queue *q = create_queue();
-  char name[NAME_LEN];
+  char name[VALUE_LEN];
   enqueue(q, "1");
   enqueue(q, "2");
   enqueue(q, "3");
