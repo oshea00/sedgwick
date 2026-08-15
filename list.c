@@ -1,3 +1,16 @@
+/*
+ * list.c
+ *
+ * A singly linked list with distinct head and tail sentinels, built on the
+ * exercise in Robert Sedgewick, "Algorithms in C" (1990), Ch. 3 (lists).
+ *
+ * to 'push' a value inserts it at the head of the list.
+ * to 'pop' a value removes the item from the head of the list.
+ * Both operations are O(1) thanks to the head sentinel, and the tail
+ * sentinel marks the end of the list so iteration can stop cleanly.
+ *
+ * The list also supports in-place reversal and full deallocation.
+ */
 #include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +25,7 @@ list allocate_item() {
   return item;
 }
 
+// Return true when the head sentinel points directly at the tail sentinel.
 int is_empty(list items) {
   list curr = items->next;
   if (curr == curr->next) {
@@ -30,6 +44,7 @@ list create_list() {
   return head;
 }
 
+// Insert a new item at the head of the list, after the head sentinel.
 void push(list items, const char *name, size_t len) {
   list item = allocate_item();
   char *value = (char *)malloc(len);
@@ -43,6 +58,7 @@ void push(list items, const char *name, size_t len) {
   items->next = item;
 }
 
+// Remove the item at the head of the list, copying its value out.
 int pop(list items, char *out, size_t len) {
   list curr = items->next;
   if (is_empty(items)) {
@@ -56,6 +72,7 @@ int pop(list items, char *out, size_t len) {
   }
 }
 
+// Print every item from the head sentinel up to the tail sentinel.
 void list_items(list items) {
   list curr = items->next;
   while (curr->next != curr) {
@@ -78,11 +95,13 @@ void reverse_items(list items) {
   items->next = prev;
 }
 
+// Free a single item node and the value string it owns.
 void free_item(list item) {
   free(item->value);
   free(item);
 }
 
+// Free every item node between the sentinels, then the sentinels themselves.
 void free_list(list items) {
   list curr = items->next;
   while (curr->next != curr) {

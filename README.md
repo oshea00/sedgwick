@@ -25,9 +25,10 @@ cc -Wall -O2 -o bin/<name> <name>.c
 | File | Source (chapter) | Description |
 |------|------------------|-------------|
 | `euclid.c` | Ch. 1, Program 1.1 | Euclidean algorithm for computing the greatest common divisor (GCD) of two integers. |
-| `lists.c` | Ch. 3 (lists) | Singly linked list with head/tail sentinels: push at head, pop from head, iterate, reverse, and free. |
+| `list.c` | Ch. 3 (lists) | Singly linked list with head/tail sentinels: push at head, pop from head, iterate, reverse, and free. |
 | `queues_naive.c` | Ch. 3 (queues, linked-list exercise) | Queue built on a sentinel list with O(1) enqueue and O(n) dequeue (traverses to the end on removal). |
 | `queues.c` | Ch. 3 (queues, linked-list exercise) | Queue with explicit head/tail pointers and O(1) enqueue/dequeue. |
+| `trees.c` | Ch. 5 (trees) | Binary tree of single-character values with in-order, pre-order, and post-order traversals, sideways print, and recursive deallocation. |
 
 ## Usage
 

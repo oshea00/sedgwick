@@ -1,3 +1,18 @@
+/*
+ * trees.c
+ *
+ * A small binary tree of single-character values, with three recursive
+ * traversal orders, a sideways print, and full deallocation.
+ *
+ * From Robert Sedgewick, "Algorithms in C" (1990), Ch. 5 (trees). The
+ * traversal and printing functions are recursive, each visiting every node
+ * exactly once, so all are O(n) in the number of nodes.
+ *
+ * In-order visits left, then node, then right (sorted order for a BST).
+ * Pre-order visits node, then left, then right.
+ * Post-order visits left, then right, then node.
+ *
+ */
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -7,6 +22,7 @@ typedef struct node {
     struct node *right;
 } node;
 
+// Allocate a single tree node holding the given value.
 node *create_node(char value) {
     node *n = (node *)malloc(sizeof *n);
     n->value = value;
@@ -15,6 +31,7 @@ node *create_node(char value) {
     return n;
 }
 
+// Print the tree sideways, growing to the right, indented by depth.
 void print_tree(node *n, int level) {
     if (n == NULL)
         return;
@@ -26,6 +43,7 @@ void print_tree(node *n, int level) {
     print_tree(n->left, level+1);
 }
 
+// In-order traversal: left subtree, node, right subtree.
 void list_inorder(node *n) {
     if (n==NULL)
       return;
@@ -34,6 +52,7 @@ void list_inorder(node *n) {
     list_inorder(n->right);
 }
 
+// Pre-order traversal: node, left subtree, right subtree.
 void list_preorder(node *n) {
     if (n==NULL)
       return;
@@ -42,6 +61,7 @@ void list_preorder(node *n) {
     list_preorder(n->right);
 }
 
+// Post-order traversal: left subtree, right subtree, node.
 void list_postorder(node *n) {
     if (n==NULL)
       return;
@@ -50,6 +70,7 @@ void list_postorder(node *n) {
     printf("%c ",n->value);
 }
 
+// Free every node in post-order, children before parents.
 void destroy_tree(node *n) {
     if (n == NULL)
         return;
