@@ -65,7 +65,7 @@ int main(void) {
     tree->left->left = create_node('D');
     tree->left->right = create_node('E');
     print_tree(tree,0);
-    printf("In-order\n");
+    printf("In-order:\n");
     list_inorder(tree);
     printf("\nPre-order:\n");
     list_preorder(tree);
